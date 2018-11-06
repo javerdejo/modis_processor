@@ -9,7 +9,7 @@ CONFIG=$ROOTPROC/config
 
 # file exists?
 if [ ! -f $CONFIG/prods ]; then
-    echo "File prods not found!"
+    echo "File $CONFIG/prods not found!"
     exit 1
 fi
 
