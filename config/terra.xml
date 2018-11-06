@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE rt_stps SYSTEM "rt-stps.dtd">
+
+<rt_stps id="PDS and Socket Output B28">
+
+<frame_sync pattern="1acffc1d" frameLength="1024"
+    slip="0" trueSync="true" invertedSync="true"
+    flywheelDuration="1" PnEncoded="false">
+    <timestamp epoch="19950810000000" />
+</frame_sync>
+
+<reed_solomon discardUncorrectables="true"
+    doBlockCorrection="true" interleave="4"
+    useStandardCCSDS="true" />
+
+<spacecrafts>
+    <spacecraft label="spid42" id="42"
+        insertZoneLength="0" doHeaderDecode="false"
+        headerErrorControlPresent="false" />
+</spacecrafts>
+
+<terra_decoder label="TerraDecoder" />
+
+<cadu_service>
+    <svlink vcid="42" spid="42" label="vc42" />
+</cadu_service>
+
+<ccsds_services>
+    <path label="vc42" spacecraft="spid42"
+        OCFpresent="false" crcParityPresent="false"
+        fill="c9" discardPacketsWithFill="true"
+        discardIdlePackets="true" maxRationalPacketSize="8192">
+            <pklink appid="64" label="a64"/>
+    </path>
+</ccsds_services>
+
+<packets>
+    <packet label="a64" minSize="276" maxSize="642"
+        discardWrongLengthPackets="true" checkSequenceCounter="true" />
+</packets>
+
+<output_channels>
+     <socket label="modis_output" unitType="PACKET" annotation="NONE"
+         host="localhost" port="3512" bufferSize="65536" />
+
+<sorcerer label="pds" path="." KBperFile="0" >
+	 <appid id="64" vcid="42">
+		<packetLength length="276" />
+		<packetLength length="642" />
+	 </appid>
+</sorcerer>
+
+</output_channels>
+
+<links>
+    <link from="frame_sync" to="reed_solomon" />
+    <link from="reed_solomon" to="frame_status" />
+    <link from="frame_status" to="TerraDecoder" />
+    <link from="TerraDecoder" to="cadu_service" />
+    <link from="a64" to="modis_output" />
+    <link from="a64" to="pds" />
+</links>
+
+</rt_stps>

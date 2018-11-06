@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE rt_stps SYSTEM "rt-stps.dtd">
+
+<rt_stps id="Aqua">
+
+<frame_sync frameLength="1024" PnEncoded="true">
+    <timestamp epoch="19950810000000" />
+</frame_sync>
+
+
+<reed_solomon useStandardCCSDS="true" discardUncorrectables="true"
+    doBlockCorrection="true" interleave="4" />
+
+
+<spacecrafts>
+    <spacecraft label="spid154" id="154" />
+</spacecrafts>
+
+
+<cadu_service>
+    <svlink label="MODIS_30" vcid="30" spid="154" />
+</cadu_service>
+
+
+<ccsds_services>
+    <path label="MODIS_30" spacecraft="spid154" >
+            <pklink appid="64" label="MODIS_64"/>
+    </path>
+</ccsds_services>
+
+
+<packets>
+    <packet label="MODIS_64"  minSize="276" maxSize="642" />
+</packets>
+
+
+<output_channels>
+    <sorcerer label="MODIS" path="." spid="154" >
+        <appid id="64" vcid="30" timeOffset="6" CUCtime="false">
+                <packetLength length="642"/>
+                <packetLength length="276"/>
+        </appid>
+    </sorcerer>
+
+    <socket label="modis_socket" unitType="PACKET" annotation="NONE"
+         host="localhost" port="3511" bufferSize="65536" />
+
+</output_channels>
+
+
+<links>
+    <link from="frame_sync" to="pn" />
+    <link from="pn" to="reed_solomon" />
+    <link from="reed_solomon" to="frame_status" />
+    <link from="frame_status" to="cadu_service" />
+    <link from="MODIS_64" to="MODIS" />
+    <link from="MODIS_64" to="modis_socket" />
+</links>
+
+</rt_stps>

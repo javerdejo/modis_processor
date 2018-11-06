@@ -1,0 +1,29 @@
+<graph id="ReprojectGraph">
+<version>1.0</version>
+
+<node id="ReprojectNode">
+<operator>Reproject</operator>
+<sources>
+<source>${source}</source>
+</sources>
+<parameters>
+    <crs>
+     GEOGCS["WGS84(DD)",
+            DATUM["WGS84",
+                  SPHEROID["WGS84", 6378137.0, 298.257223563]],
+            PRIMEM["Greenwich", 0.0],
+            UNIT["degree", 0.017453292519943295],
+            AXIS["Geodetic longitude", EAST],
+            AXIS["Geodetic latitude", NORTH]]
+    </crs>
+    <resampling>Nearest</resampling>
+    <orthorectify>false</orthorectify>
+    <noDataValue>NaN</noDataValue>
+    <includeTiePointGrids>true</includeTiePointGrids>
+    <addDeltaBands>false</addDeltaBands>
+    <applyValidPixelExpression>true</applyValidPixelExpression>
+    <transferValidPixelExpression>true</transferValidPixelExpression>
+    <maskExpression/>
+</parameters>
+</node>
+</graph>
