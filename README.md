@@ -6,6 +6,7 @@ Table of contents
 
 <!--ts-->
    * [Introduction](#introduction)
+   * [Additional tools](#tools)
    * [Configuration](#configuration)
       * [aqua.xml](#aqua)
       * [terra.xml](#terra)
@@ -16,6 +17,22 @@ Table of contents
 
 <a name="introduction"></a>
 # Introduction
+
+<a name="tools"></a>
+# Additional tools
+
+proccesor/
+    |
+    +-- data
+    |      |
+    |      +- bz2
+    |      +- level0
+    |      +- level1
+    |      +- level2
+    |      +- raw
+    +-- log
+    +-- rt-stps
+    +-- seadas
 
 <a name="configuration"></a>
 # Configuration
