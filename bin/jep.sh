@@ -140,10 +140,20 @@ fi
 # Creates a MODIS Level 2 file
 echo "Creating L2 file ..."
 mkdir $JEPDATA/level2/${L1BDATA}
-l2gen ifile=${L1BDATA}.L1B_LAC geofile=${L1ADATA}.GEO ofile=${L1BDATA}.L2_LAC_OC suite=OC l2prod="chlor_a ipar nflh rhos rhos_nnn rhot_nnn sst sst4"
+# loads the products list to be generated
+PROD=`$BIN/listprod.sh`
+l2gen ifile=${L1BDATA}.L1B_LAC geofile=${L1ADATA}.GEO ofile=${L1BDATA}.L2_LAC_OC suite=OC l2prod=$PROD
+if [ $? -ne 0 ]; then
+  echo "Error generating L2 file"
+  exit 208
+fi
 
 echo "Reprojecting L2 file ..."
 $BIN/reproject.sh ${L1BDATA}.L2_LAC_OC
+if [ $? -ne 0 ]; then
+  echo "Error reprojecting L2 file"
+  exit 208
+fi
 
 # moving files to final directories
 mv ${L1BDATA}.L1B_LAC $JEPDATA/level1/${L1BDATA}
