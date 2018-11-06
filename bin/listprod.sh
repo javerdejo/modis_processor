@@ -3,6 +3,7 @@
 
 # processor root
 ROOTPROC="/eris/l2processor"
+
 # configuration files
 CONFIG=$ROOTPROC/config
 
