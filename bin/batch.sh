@@ -18,7 +18,7 @@ LOG='./processed.log'
 echo "Batch v1.309.18"
 
 # downloads the files from NASA servers
-#$PROCESSOR/download_data.sh -d $CONFIG/download
+$PROCESSOR/download_data.sh -d $CONFIG/download
 
 # for all files with jep termination
 TO_PROC_LIST=`ls $BASE_DIR/*.jep`
@@ -56,4 +56,8 @@ for FILE in $TO_PROC_LIST; do
 done
 
 # Proccess ended
+echo "Notifying the owner ..."
+ENDDATE=`date '+%Y-%m-%d %H:%M'`
+h476ss50python $PROCESSOR/sendmail.py -s "Akbal message" -t javier.arellano@mail.ecosur.mx -m "Process finished at $ENDDATE"
+
 echo "All files has been processed"

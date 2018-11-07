@@ -142,7 +142,9 @@ echo "Creating L2 file ..."
 mkdir $JEPDATA/level2/${L1BDATA}
 # loads the products list to be generated
 PROD=`$BIN/listprod.sh`
-l2gen ifile=${L1BDATA}.L1B_LAC geofile=${L1ADATA}.GEO ofile=${L1BDATA}.L2_LAC_OC suite=OC l2prod="chlor_a ipar nflh rhos rhos_nnn rhot_nnn sst sst4"
+l2gen ifile=${L1BDATA}.L1B_LAC geofile=${L1ADATA}.GEO ofile=${L1BDATA}.L2_LAC_OC suite=OC l2prod="$PROD"
+#l2gen ifile=${L1BDATA}.L1B_LAC geofile=${L1ADATA}.GEO ofile=${L1BDATA}.L2_LAC_OC suite=OC l2prod="chlor_a ipar nflh rhos rhos_nnn rhot_nnn sst sst4"
+
 if [ $? -ne 0 ]; then
   echo "Error generating L2 file"
   exit 208
@@ -161,9 +163,6 @@ mv ${L1ADATA}.GEO $JEPDATA/level1/${L1BDATA}
 mv ${L1BDATA}.L2_LAC_OC $JEPDATA/level2/${L1BDATA}
 mv ${L1BDATA}_reprojected.h5 $JEPDATA/level2/${L1BDATA}
 
-ENDDATE=`date '+%Y-%m-%d %H:%M'`
-echo "Notifying the owner ..."
-python $BIN/sendmail.py -s "Akbal message" -t javier.arellano@mail.ecosur.mx -m "Process finished at $ENDDATE"
 echo "All files for ${L1BDATA} has been generated"
 
 # Delete temporary files

@@ -28,4 +28,4 @@ STRING=`echo $STRING | xargs echo -n`
 
 # append double quotes at the beginning and the end of the string and shows the
 # resulting string
-echo \"$STRING\"
+echo $STRING
