@@ -18,7 +18,7 @@ LOG='./processed.log'
 echo "Batch v1.309.18"
 
 # downloads the files from NASA servers
-$PROCESSOR/download_data.sh -d $CONFIG/download
+#$PROCESSOR/download_data.sh -d $CONFIG/download
 
 # for all files with jep termination
 TO_PROC_LIST=`ls $BASE_DIR/*.jep`
